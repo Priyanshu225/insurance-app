@@ -1,0 +1,32 @@
+1. build and Start the container - astro dev start
+2. Add Connection in airflow>admin>connections :-
+	a. Connection Id - stock_api
+	b. Connection Type - HTTP
+	c. Host - https://query1.finance.yahoo.com/
+	d. Extra - {
+ 			 "endpoint": "/v8/finance/chart/",
+			 "headers": {
+  			 "Content-Type": "apllication/json",
+   			 "User-Agent": "Mozilla/5.0"
+  			}
+		   }
+3. Add Connection in airflow>admin>connections :-
+	a. Connection Id - minio
+	b. Connection Type - AWS
+	c. AWS Access Key ID - minio
+	d. AWS Secret Access Key - minio123
+	d. Extra - {
+ 			 "endpoint_url": "http://host.docker.internal:9000"
+		   }
+4. Change path - cd spark/notebooks/stock_transform
+5. Build Docker image for spark-app - docker build . -t airflow/stock-app
+6. Restart the environment - astro dev restart
+7. Add Connection in airflow>admin>connections :-
+	a. Connection Id - postgres
+	b. Connection Type - postgres
+	c. Host - postgres
+	d. Database - postgres
+	e. Login - postgres
+	f. Password - postgres
+	g. Port - 5432
+8.Login to Metadata base - http://localhost:3000/ and then create dashboard.
